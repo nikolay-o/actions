@@ -12,7 +12,12 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v4
-    - name: Calculate version
+    - id: semver-tag
+      uses: gandarez/semver-action@master
+      with:
+        branching_model: "trunk-based"
+    - name: "Created tag"
+      run: echo "tag ${{ steps.semver-tag.outputs.semver_tag }}"
+    - name: List files
       run: |
         ls -la
-        echo "v0.1.0-rc"
