@@ -1,0 +1,8 @@
+name: app
+on: workflow_dispatch
+jobs:
+  setVersions:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Calculate version
+      run: echo "v0.1.0-rc"
