@@ -1,5 +1,7 @@
 name: app
-on: workflow_dispatch
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
   setVersions:
     runs-on: ubuntu-latest
@@ -8,6 +10,9 @@ jobs:
         env:
           NODE_ENV: development
     steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
     - name: Calculate version
       run: |
+        ls -la
         echo "v0.1.0-rc"
