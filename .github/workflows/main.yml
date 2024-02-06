@@ -3,6 +3,10 @@ on: workflow_dispatch
 jobs:
   setVersions:
     runs-on: ubuntu-latest
+    container:
+        image: ubuntu:20.04
+        env:
+          NODE_ENV: development
     steps:
     - name: Calculate version
       run: |
