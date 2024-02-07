@@ -1,9 +1,10 @@
 name: app
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, closed]
 jobs:
   setVersions:
+    if: ${{ github.event.pull_request.merged }}
     runs-on: ubuntu-latest
     container:
         image: bitnami/git:2.43.0
@@ -19,7 +20,7 @@ jobs:
     - id: semver-tag
       uses: gandarez/semver-action@master
       with:
-        branching_model: "trunk-based"
+        branching_model: "git-flow"
         main_branch_name: "main"
     - name: "Created tag"
       run: echo "tag ${{ steps.semver-tag.outputs.semver_tag }}"
