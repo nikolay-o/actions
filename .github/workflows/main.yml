@@ -1,9 +1,10 @@
 name: app
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, closed]
 jobs:
   setVersions:
+    if: ${{ github.event.pull_request.merged }}
     runs-on: ubuntu-latest
     container:
         image: bitnami/git:2.43.0
